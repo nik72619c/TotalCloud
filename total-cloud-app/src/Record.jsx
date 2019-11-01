@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+
 import {URL} from './constants/constants';
 
 export default class Record extends React.Component {
@@ -8,19 +9,18 @@ state = {
     records : []
 }
     componentDidMount() {
+      // axios call for fetching json data
        this.fetchRecords();
     }
 
     fetchRecords = async ()=>{
         try {
             let records = await axios.get(URL);
-            console.log(records);
             this.setState({records: records.data});
             this.props.sendRecordsToParent(records.data);
-        } catch(e){
+        } catch(e) {
             console.log('some error occured',e);
         }
-        
     }
     render(){
         return (
